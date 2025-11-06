@@ -18,10 +18,10 @@ class Client {
             String ligneServeur;
 
             while ((ligneServeur = in.readLine()) != null) { // tant que le serveur n'a pas fermé
+                boolean attenteReponse = ligneServeur.endsWith(CARACTERE_REPONSE);
+                System.out.println("Serveur : " + (attenteReponse ? ligneServeur.substring(0, ligneServeur.length() - 1) : ligneServeur));
 
-                System.out.println("Serveur : " + ((ligneServeur.endsWith(CARACTERE_REPONSE)) ? ligneServeur.substring(0, ligneServeur.length() - 1) : ligneServeur));
-
-                if (ligneServeur.endsWith(CARACTERE_REPONSE)) {
+                if (attenteReponse) {
                     // répondre après chaque message serveur (terminal)
                     System.out.print("> ");
                     String reponse = sc.nextLine();
