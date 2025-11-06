@@ -7,6 +7,8 @@ class ServeurEcho extends Thread {
     final static int port = 5000;
     Socket s;
 
+    private static String caracterReponse = Client.CARACTERE_REPONSE;
+
     ServeurEcho(Socket s) {
         this.s = s;
     }
@@ -18,10 +20,10 @@ class ServeurEcho extends Thread {
             PrintWriter out = new PrintWriter(s.getOutputStream());
             String line;
 
-            out.println("server echo actif");
+            out.println("server echo actif" + caracterReponse);
             out.flush();
             while((line=in.readLine())!=null) { // attendre la ligne
-                out.println(line);
+                out.println(line + caracterReponse);
                 out.flush(); // renvoyer la ligne lue
             }
             System.out.println("Fin de la communication Serveur");
