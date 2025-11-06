@@ -19,7 +19,7 @@ class Client {
 
             while ((ligneServeur = in.readLine()) != null) { // tant que le serveur n'a pas fermé
 
-                System.out.println("Serveur : " + ((!ligneServeur.isEmpty() && ligneServeur.endsWith(CARACTERE_REPONSE)) ? ligneServeur.substring(0, ligneServeur.length() - 1) : ligneServeur));
+                System.out.println("Serveur : " + ((ligneServeur.endsWith(CARACTERE_REPONSE)) ? ligneServeur.substring(0, ligneServeur.length() - 1) : ligneServeur));
 
                 if (ligneServeur.endsWith(CARACTERE_REPONSE)) {
                     // répondre après chaque message serveur (terminal)
