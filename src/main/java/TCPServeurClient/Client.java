@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-class Client {
+class  Client {
     public final static String CARACTERE_REPONSE = "\u200B";
 
     public static void main(String[] args) {
@@ -23,7 +23,7 @@ class Client {
 
                 if (attenteReponse) {
                     // répondre après chaque message serveur (terminal)
-                    System.out.print("> ");
+                    System.out.print("Client : ");
                     String reponse = sc.nextLine();
                     out.println(reponse);
                     out.flush();
