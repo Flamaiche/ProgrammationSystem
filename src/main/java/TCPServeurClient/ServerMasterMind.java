@@ -26,7 +26,7 @@ class ServerMasterMind extends Thread {
             secret[i] = (char) ('0' + rand.nextInt(MAX_Value));
         }
     }
-
+    
     private char[] formatReponse(String reponse) {
         char[] reponseChar = new char[LONGUEUR_Reponse];
 
