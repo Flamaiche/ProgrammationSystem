@@ -3,22 +3,24 @@ package thread;
 import java.lang.Thread;
 import java.util.ArrayList;
 
-public class Action extends Thread {
-    public static final int n = 1_000_000;
-    public static final Object mutex = new Object();
-    public static int x = 0;
+public class TestThread {
 
-    /*
-    ce cas est meilleur dans ce cas si car il permet ce rapidement faire le changement de valeur sur x, qui ici dans ce
-    cas est le but, mais ouvrir et fermer le verrou a chaque iteration est couteux en temps
-    */
-    public void run() {
-        for(int i=0; i<n; i++) {
-            synchronized(mutex) {
-                x++;
+    static class Action extends Thread {
+        public static final int n = 1_000_000;
+        public static final Object mutex = new Object();
+        public static int x = 0;
+
+        /*
+        ce cas est meilleur dans ce cas si car il permet ce rapidement faire le changement de valeur sur x, qui ici dans ce
+        cas est le but, mais ouvrir et fermer le verrou a chaque iteration est couteux en temps
+        */
+        public void run() {
+            for(int i=0; i<n; i++) {
+                synchronized(mutex) {
+                    x++;
+                }
             }
         }
-    }
 
     /*
     ce cas en meilleur dans les cas ou il faut juste faire sur une section, cela evite de ouvrir et fermer le verrou
@@ -32,9 +34,9 @@ public class Action extends Thread {
             }
         }
     }*/
-}
+    }
 
-class TestThread {
+
     private static int nbThreads = 10;
     private static ArrayList<Thread> threads = new ArrayList<>();
 
