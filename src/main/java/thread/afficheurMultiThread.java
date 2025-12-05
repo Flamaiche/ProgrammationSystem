@@ -3,30 +3,39 @@ package thread;
 public class afficheurMultiThread {
 
     static class Action extends Thread {
-        private String message;
+        private char first;
+        private char last;
         public static Object mutex = new Object();
 
-        public Action(String message) {
-            this.message = message;
+        public Action(char first, char last) {
+            this.first = first;
+            this.last = last;
         }
 
         public void run() {
             /*
             mutex l'entiereté de le methode run pour chaque thread pour éviter le melange de message
             */
-            synchronized (mutex) {
-                for (int i = 0; i < message.length(); i++) {
-                    System.out.print(message.charAt(i));
+            try {
+                for (int nbFois = 0; nbFois < 20; nbFois++) {
+                    synchronized (mutex) {
+                        for (char c = first; c <= last; c++) {
+                            System.out.print(c);
+                            Thread.sleep(1);
+                        }
+                        System.out.println();
+                    }
                 }
-                System.out.println();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
 
     public static void main(String[] args) {
-        Thread t1 = new Action("Thread 1: Bonjour !");
-        Thread t2 = new Action("Thread 2: Salut !");
-        Thread t3 = new Action("Thread 3: Coucou !");
+        Thread t1 = new Action('a', 'z');
+        Thread t2 = new Action('A', 'Z');
+        Thread t3 = new Action('0', '9');
 
         t1.start();
         t2.start();
